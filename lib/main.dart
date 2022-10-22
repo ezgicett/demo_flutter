@@ -1,10 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:workshop_1_flutter/home_page.dart';
 import 'package:workshop_1_flutter/product_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: HomePage(),
-  )); //MaterialApp should be here always?
+import 'translations/codegen_loader.g.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale('tr'),
+        Locale('en'),
+      ],
+      assetLoader: const CodegenLoader(),
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en'),
+      child: MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
+    );
+  }
 }

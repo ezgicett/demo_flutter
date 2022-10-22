@@ -1,4 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:workshop_1_flutter/core/constants/color_const.dart';
+import 'package:workshop_1_flutter/core/constants/padding.dart';
+
+import 'core/constants/image.dart';
+import 'core/constants/radius.dart';
+import 'translations/locale_keys.g.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
@@ -11,10 +18,10 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: ColorConst().blueGrey,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: ColorConst().transparent,
         elevation: 0.0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -22,14 +29,14 @@ class _ProductPageState extends State<ProductPage> {
             Navigator.of(context).pop();
           },
         ),
-        title: Text("Product Detail"),
+        title: Text(LocaleKeys.productDetail.tr()),
       ),
       body: SafeArea(
         child: Container(
           child: Column(
             children: [
               Image.asset(
-                "assets/images/chair2.jpg",
+                AllImages().chair2,
                 height: MediaQuery.of(context).size.height / 2,
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit
@@ -37,34 +44,34 @@ class _ProductPageState extends State<ProductPage> {
               ),
               Expanded(
                 child: Card(
-                  margin: const EdgeInsets.all(16.0),
-                  color: Colors.white,
+                  margin: PagePadding.cardColumn(),
+                  color: ColorConst().white,
                   elevation: 8.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
+                  shape:
+                      RoundedRectangleBorder(borderRadius: WidgetRadius.card()),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: PagePadding.card(),
                     child: Column(
                       children: [
                         Row(
-                          children: const [
+                          children: [
                             Expanded(
                                 child: Text(
-                              "Sabeb Summer Chair",
-                              style: TextStyle(
+                              LocaleKeys.chairName.tr(),
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
                             )),
                             Icon(
                               Icons.star,
-                              color: Colors.yellow,
+                              color: ColorConst().yellow,
                             ),
                             Text("4.5"),
                           ],
                         ),
-                        const Align(
+                        Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            "IKAE",
+                            LocaleKeys.IKAE.tr(),
                           ),
                         ),
                         const SizedBox(
@@ -83,10 +90,11 @@ class _ProductPageState extends State<ProductPage> {
                             Expanded(
                               flex: 1,
                               child: FloatingActionButton(
+                                  heroTag: "btn1",
                                   onPressed: () {},
-                                  backgroundColor: Colors.grey,
+                                  backgroundColor: ColorConst().grey,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: WidgetRadius.floatingButton(),
                                   ),
                                   child: Icon(Icons.shopping_basket)),
                             ),
@@ -96,10 +104,11 @@ class _ProductPageState extends State<ProductPage> {
                             Expanded(
                               flex: 4,
                               child: FloatingActionButton(
+                                  heroTag: "btn2",
                                   onPressed: () {},
-                                  backgroundColor: Colors.blueGrey,
+                                  backgroundColor: ColorConst().blueGrey,
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15),
+                                    borderRadius: WidgetRadius.floatingButton(),
                                   ),
                                   child: Text("Buy\$125.00")),
                             ),
