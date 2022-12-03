@@ -1,69 +1,14 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:workshop_1_flutter/core/constants/padding.dart';
-import 'package:workshop_1_flutter/product_page.dart';
-import 'package:workshop_1_flutter/translations/locale_keys.g.dart';
-
-import 'core/constants/color_const.dart';
-import 'core/constants/image.dart';
-import 'core/constants/radius.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [
-              persona(),
-              searchProduct(),
-              middleImage(),
-              const SizedBox(
-                height: 10,
-              ),
-              textOnly(),
-              //horizontal listView
-              Padding(
-                padding: PagePadding.all(),
-                child: Container(
-                  height: 320,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      itemCard(context),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      itemCard(context),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+part of '../home_page.dart';
 
 Widget persona() {
   return Padding(
     padding: PagePadding.heading(),
     child: Row(
       children: [
-        const CircleAvatar(
-          radius:
-              30.0, // AYRI BİR CONSTANT SINIFI MI AÇMALIYIM,YOKSA RADİUS TUTUP HEPSİNİ ORDAN MI
+        CircleAvatar(
+          radius: WidgetRadius.circleAvatar()
+              .bottomRight
+              .x, // AYRI BİR CONSTANT SINIFI MI AÇMALIYIM,YOKSA RADİUS TUTUP HEPSİNİ ORDAN MI
         ),
         const SizedBox(
           width: 10,
@@ -87,19 +32,19 @@ Widget persona() {
   );
 }
 
-Widget searchProduct() {
+Widget searchProduct(FocusNode node) {
   return Padding(
     padding: PagePadding.all(),
     child: Row(
       children: [
         Expanded(
           child: TextField(
+            focusNode: node,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search),
               hintText: LocaleKeys.searchFurniture.tr(),
               fillColor: ColorConst().whiteIsh,
               filled: true,
-              labelStyle: TextStyle(),
               enabledBorder: OutlineInputBorder(
                 borderRadius: WidgetRadius.circleAvatar(),
                 borderSide: BorderSide(
@@ -127,7 +72,7 @@ Widget searchProduct() {
   );
 }
 
-Widget middleImage() {
+Widget middleImage(BuildContext context) {
   return Stack(
     children: [
       Padding(
@@ -143,11 +88,11 @@ Widget middleImage() {
           children: [
             Text(
               LocaleKeys.blackFriday.tr(),
-              style: TextStyle(fontSize: 30),
-            ),
+              style: Theme.of(context).textTheme.headline3,
+            ), //ThemeData().textTheme.labelMedium),
             Text(
               LocaleKeys.discountItem.tr(),
-              style: TextStyle(fontSize: 20),
+              style: ThemeData().textTheme.headline2,
             ),
           ],
         ),

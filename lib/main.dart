@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workshop_1_flutter/home_page.dart';
-import 'package:workshop_1_flutter/product_page.dart';
+import 'package:workshop_1_flutter/core/init/theme/app_theme.dart';
+import 'package:workshop_1_flutter/view/views/home/home_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import 'translations/codegen_loader.g.dart';
@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: AppTheme.theme,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

@@ -11,13 +11,13 @@ class ColorConst {
 
 //grey
   final Color grey = Colors.grey;
-  final Color greyBlue = Color(0xFF263238);
+  final Color greyBlue = Color(0xFF263238); //  bu tercih edilsin
 
 //black
   final Color black87 = Colors.black87;
 
 //blue
-  final Color blueGrey = Colors.blueGrey;
+  final Color blueGrey = Color.fromRGBO(96, 125, 139, 1);
 
 //yellow
   final Color yellow = Colors.yellow;
